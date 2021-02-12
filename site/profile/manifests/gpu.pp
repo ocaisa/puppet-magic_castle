@@ -20,7 +20,7 @@ class profile::gpu::install::deps {
   ensure_packages(['kernel-devel'], {'ensure' => 'installed'})
   ensure_packages(['dkms'], {
     'require' => Yumrepo['epel'],
-    'ensure' => 'installed'
+    'ensure' => 'installed',
   })
 }
 
