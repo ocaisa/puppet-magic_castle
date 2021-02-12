@@ -17,9 +17,10 @@ class profile::gpu {
 
 class profile::gpu::install::deps {
   ensure_resource('file', '/etc/nvidia', {'ensure' => 'directory' })
-  ensure_packages(['kernel-devel'], {ensure => 'installed'})
+  ensure_packages(['kernel-devel'], {'ensure' => 'installed'})
   ensure_packages(['dkms'], {
-    'require' => Yumrepo['epel']
+    'require' => Yumrepo['epel'],
+    'ensure' => 'installed'
   })
 }
 
