@@ -9,7 +9,7 @@ class profile::base (
   if dig($::facts, 'os', 'release', 'major') == '8' {
     file_line { 'enable_powertools':
       ensure => present,
-      path   => '/etc/yum.repos.d/CentOS-PowerTools.repo',
+      path   => '/etc/yum.repos.d/CentOS-Linux-PowerTools.repo',
       line   => 'enabled=1',
       match  => '^enabled=0$',
     }
@@ -168,6 +168,13 @@ class profile::base (
     ensure => absent
   }
 
+  $mc_plugins_version = '1.0.3'
+  package { 'magic_castle-plugins':
+    ensure   => 'latest',
+    name     => 'magic_castle-plugins',
+    provider => 'rpm',
+    source   => "https://github.com/computecanada/magic_castle-plugins/releases/download/v${mc_plugins_version}/magic_castle-plugins-${mc_plugins_version}-1.${::facts['os']['architecture']}.rpm",
+  }
 }
 
 class profile::base::azure {
